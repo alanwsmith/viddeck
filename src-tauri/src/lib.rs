@@ -35,21 +35,32 @@ pub fn run() {
 function awsPlayPause() {
 let vid = document.querySelector("video");
 if (vid) {
-vid.paused ? vid.play() : vid.pause();
+if (vid.paused) {
+if (vid.currentTime > 10) {
+vid.currentTime -= 7;
+}
+vid.play();
+} else {
+vid.pause()
+}
+
+
+// vid.paused ? vid.play() : vid.pause();
 }
 }
+
+
+
 "#,
       )?;
       webview_window.open_devtools();
 
-      let ctrl_n_shortcut = Shortcut::new(
-        Some(Modifiers::CONTROL),
-        Code::KeyN,
-      );
+      let ctrl_n_shortcut =
+        Shortcut::new(Some(Modifiers::SHIFT), Code::F1);
       app.handle().plugin(
         tauri_plugin_global_shortcut::Builder::new()
           .with_handler(move |appx, shortcut, event| {
-            println!("{:?}", shortcut);
+            //println!("{:?}", shortcut);
             if shortcut == &ctrl_n_shortcut {
               match event.state() {
                 ShortcutState::Pressed => {
@@ -72,7 +83,6 @@ vid.paused ? vid.play() : vid.pause();
       app
         .global_shortcut()
         .register(ctrl_n_shortcut)?;
-
       Ok(())
     })
     .run(tauri::generate_context!())
