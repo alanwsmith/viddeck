@@ -1,10 +1,10 @@
-use tauri::{command, AppHandle};
+use tauri::{command, AppHandle, Manager};
 
-#[command]
-fn do_rewind(app: AppHandle) {
-  dbg!("ASD");
-  println!("eeeee");
-}
+// #[command]
+// fn do_rewind(app: AppHandle) {
+//   dbg!("ASD");
+//   println!("eeeee");
+// }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -26,11 +26,16 @@ pub fn run() {
       );
       app.handle().plugin(
         tauri_plugin_global_shortcut::Builder::new()
-          .with_handler(move |_app, shortcut, event| {
+          .with_handler(move |appx, shortcut, event| {
             println!("{:?}", shortcut);
             if shortcut == &ctrl_n_shortcut {
               match event.state() {
                 ShortcutState::Pressed => {
+                  let wv = appx
+                    .get_webview_window("main")
+                    .expect("no main widow");
+                  wv.eval(r#"console.log("HERER");"#)
+                    .expect("eval did not work");
                   println!("Ctrl-N Pressed!");
                 }
                 ShortcutState::Released => {
