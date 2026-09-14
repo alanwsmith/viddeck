@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    youtube_scrubber_lib::run()
+    comal9000video_scrubber_lib::run()
 }

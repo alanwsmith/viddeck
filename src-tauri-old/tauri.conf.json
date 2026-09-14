@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "comal9000video_scrubber",
+  "productName": "youtube_scrubber",
   "version": "0.1.0",
-  "identifier": "com.al9000.video-scrubber",
+  "identifier": "com.al9000.youtubescrubber2",
   "build": {
     "frontendDist": "../src"
   },
@@ -10,7 +10,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "comal9000video_scrubber",
+        "title": "youtube_scrubber",
         "width": 800,
         "height": 600
       }
