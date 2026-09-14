@@ -1,4 +1,4 @@
-use tauri::{command, AppHandle, Manager};
+use tauri::Manager;
 
 // #[command]
 // fn do_rewind(app: AppHandle) {
@@ -20,6 +20,28 @@ pub fn run() {
         ShortcutState,
       };
 
+      let webview_window =
+        tauri::WebviewWindowBuilder::new(
+          app,
+          "main",
+          tauri::WebviewUrl::App(
+            "https://www.youtube.com".into(),
+          ),
+        )
+        .build()?;
+      webview_window.eval(
+        r#"
+
+function awsPlayPause() {
+let vid = document.querySelector("video");
+if (vid) {
+vid.paused ? vid.play() : vid.pause();
+}
+}
+"#,
+      )?;
+      webview_window.open_devtools();
+
       let ctrl_n_shortcut = Shortcut::new(
         Some(Modifiers::CONTROL),
         Code::KeyN,
@@ -34,12 +56,12 @@ pub fn run() {
                   let wv = appx
                     .get_webview_window("main")
                     .expect("no main widow");
-                  wv.eval(r#"console.log("HERER");"#)
+                  wv.eval(r#"awsPlayPause();"#)
                     .expect("eval did not work");
-                  println!("Ctrl-N Pressed!");
+                  //println!("Ctrl-N Pressed!");
                 }
                 ShortcutState::Released => {
-                  println!("Ctrl-N Released!");
+                  //println!("Ctrl-N Released!");
                 }
               }
             }
@@ -50,20 +72,6 @@ pub fn run() {
       app
         .global_shortcut()
         .register(ctrl_n_shortcut)?;
-
-      let webview_window =
-        tauri::WebviewWindowBuilder::new(
-          app,
-          "main",
-          tauri::WebviewUrl::App(
-            "https://www.youtube.com".into(),
-          ),
-        )
-        .build()?;
-      // webview_window
-      //   .eval(r#"console.log("HEREREREERE""#)?;
-
-      webview_window.open_devtools();
 
       Ok(())
     })
