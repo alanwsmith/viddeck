@@ -2,18 +2,61 @@
 
 vidDeck
 
-A wrapper around youtube that provides global hotkey
-to control the video for macOS.
+A wrapper around a youtube web page
+that provides global hotkey to control
+the video while your in other apps on macOS.
 
-This is primarily a personal project to make it
-easier to take notes on videos by using
+This is primarily a personal project to make
+it easier to take notes on videos by using
 hotkeys to control the video while still in
-a notes app. 
+a notes app. You're welcome to use it if
+it works for you. 
 
 
 -- h2
 
-Commands
+Installation
+
+- Download the vidDeck_0.1.0_aarch64.dmg
+file from the releases/macos directory
+in this repo, open it, and move the vidDeck
+app to your Applications folder. Then,
+launch it from there. 
+
+
+-- notes
+
+- This is very much a "works-on-my-machine"
+project. If it doesn't work on yours
+you'll need to figure out why yourself. 
+
+- The start/stop button rewinds a few seconds
+when you restart a video. Makes it
+easier to pick up the thread for notes. 
+
+- You can map Stream Deck buttons to
+the hotkeys to control videos that way. 
+
+- I'm not sure if you'll need to
+do the thing where you right click
+to open the app or not (based on the
+macOS security settings)
+
+- For some reason my app launcher
+doesn't see the app. I have to
+double click it directly from
+the Applications folder. 
+
+- I'm not sure what browser is used
+behind the scenes, but YouTube gives
+me an error on live chat windows
+saying it's too old for
+live chat to work. 
+
+
+-- h2
+
+The Hotkeys
 
 {{Option + Shift + S}} - start/stop
 
@@ -24,5 +67,21 @@ Commands
 {{Option + Shift + Z}} - slow down
 
 {{Option + Shift + C}} - speed up
+
+
+-- h2
+
+Links:
+
+>>
+al9000.com|
+https://al9000.com/
+>>
+
+>>
+al9000 on bluesky|
+https://bsky.app/profile/al9000.com
+>>
+
 
 
