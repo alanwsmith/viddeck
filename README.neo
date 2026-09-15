@@ -1,0 +1,28 @@
+-- title
+
+vidDeck
+
+A wrapper around youtube that provides global hotkey
+to control the video for macOS.
+
+This is primarily a personal project to make it
+easier to take notes on videos by using
+hotkeys to control the video while still in
+a notes app. 
+
+
+-- h2
+
+Commands
+
+{{Option + Shift + S}} - start/stop
+
+{{Option + Shift + A}} - rewind 
+
+{{Option + Shift + E}} - fast forward
+
+{{Option + Shift + Z}} - slow down
+
+{{Option + Shift + C}} - speed up
+
+
