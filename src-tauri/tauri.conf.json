@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "comal9000video_scrubber",
+  "productName": "vidDeck",
   "version": "0.1.0",
-  "identifier": "com.al9000.video-scrubber",
+  "identifier": "com.al9000.viddeck",
   "build": {
     "frontendDist": "../src"
   },

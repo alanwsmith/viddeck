@@ -1,5 +1,4 @@
 #!/bin/bash
 
-cargo tauri build --debug
-#
-# cargo tauri build
+# cargo tauri build --debug
+cargo tauri build
