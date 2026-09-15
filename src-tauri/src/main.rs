@@ -1,6 +1,9 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#![cfg_attr(
+  not(debug_assertions),
+  windows_subsystem = "windows"
+)]
 
 fn main() {
-    comal9000video_scrubber_lib::run()
+  comal9000viddeck_lib::run()
 }

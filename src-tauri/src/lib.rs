@@ -43,6 +43,7 @@ function awsRewind() {
 };
 
 function awsFastForward() {
+  console.log("awsFastForward()");
   let vid = document.querySelector("video");
   if (vid) {
     vid.currentTime += 8;
@@ -51,6 +52,7 @@ function awsFastForward() {
 
 
 function awsPlayFaster() {
+  console.log("awsPlayFaster()");
   let vid = document.querySelector("video");
   if (vid) {
     if (vid.playbackRate < 4.0) {
@@ -61,6 +63,7 @@ function awsPlayFaster() {
 
 
 function awsPlaySlower() {
+  console.log("awsPlaySlower()");
   let vid = document.querySelector("video");
   if (vid) {
     if (vid.playbackRate > 0.25) {
@@ -72,9 +75,13 @@ function awsPlaySlower() {
 "#,
       )?;
 
+
+
       #[cfg(debug_assertions)]
       webview_window.open_devtools();
 
+      webview_window.set_title("vidDeck")?;
+        
       let play_pause_key = Shortcut::new(
         Some(Modifiers::ALT | Modifiers::SHIFT),
         Code::KeyS,
@@ -85,21 +92,20 @@ function awsPlaySlower() {
         Code::KeyA,
       );
 
+      let fast_forward_key = Shortcut::new(
+        Some(Modifiers::ALT | Modifiers::SHIFT),
+        Code::KeyD,
+      );
 
-      // let fast_forward_key = Shortcut::new(
-      //   Some(Modifiers::ALT | Modifiers::SHIFT),
-      //   Code::KeyD,
-      // );
+      let play_faster_key = Shortcut::new(
+        Some(Modifiers::ALT | Modifiers::SHIFT),
+        Code::KeyC,
+      );
 
-      // let faster_key = Shortcut::new(
-      //   Some(Modifiers::ALT | Modifiers::SHIFT),
-      //   Code::KeyC,
-      // );
-
-      // let slower_key = Shortcut::new(
-      //   Some(Modifiers::ALT | Modifiers::SHIFT),
-      //   Code::KeyZ,
-      // );
+      let play_slower_key = Shortcut::new(
+        Some(Modifiers::ALT | Modifiers::SHIFT),
+        Code::KeyZ,
+      );
 
       app.handle().plugin(
         tauri_plugin_global_shortcut::Builder::new()
@@ -120,12 +126,36 @@ function awsPlaySlower() {
                             .eval(r#"awsRewind();"#)
                             .expect("eval did not work");
                     }
+                    if shortcut == &fast_forward_key {
+                        appx
+                            .get_webview_window("main")
+                            .expect("no main widow")
+                            .eval(r#"awsFastForward();"#)
+                            .expect("eval did not work");
+                    }
+                    if shortcut == &play_faster_key {
+                        appx
+                            .get_webview_window("main")
+                            .expect("no main widow")
+                            .eval(r#"awsPlayFaster();"#)
+                            .expect("eval did not work");
+                    }
+                    if shortcut == &play_slower_key {
+                        appx
+                            .get_webview_window("main")
+                            .expect("no main widow")
+                            .eval(r#"awsPlaySlower();"#)
+                            .expect("eval did not work");
+                    }
                 }
           })
           .build(),
       )?;
       app.global_shortcut().register(play_pause_key)?;
-      app.global_shortcut().register(rewind_key)?;
+     app.global_shortcut().register(rewind_key)?;
+     app.global_shortcut().register(fast_forward_key)?;
+     app.global_shortcut().register(play_faster_key)?;
+     app.global_shortcut().register(play_slower_key)?;
       Ok(())
     })
     .run(tauri::generate_context!())
