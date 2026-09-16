@@ -1,17 +1,11 @@
 #!/bin/bash
 
-SOURCE="../../../target/release/bundle/macos/vidDeck.app"
-DEST="./releases/vidDeck.app"
+DEBUG=0
 
-if [ -e "$DEST" ]; then
-   trash "$DEST"
+if [ "$DEBUG" -eq 1 ]; then
+    cargo tauri build --debug
+else
+    cargo tauri build
+    find "../../../target/release/bundle/dmg" -type f -name "*.dmg" -exec mv {} ./releases/macos \;
 fi
-
-# cargo tauri build --debug
-cargo tauri build
-
-if [ -e "$SOURCE" ]; then
-    mv "$SOURCE" "$DEST"
-fi
-
 
